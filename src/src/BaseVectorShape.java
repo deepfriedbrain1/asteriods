@@ -9,6 +9,19 @@ import java.awt.Shape;
  */
 public class BaseVectorShape 
 {
+    // no arg constructor
+    BaseVectorShape(){
+        setShape(null);
+        setAlive(false);
+        setX(0.0);
+        setY(0.0);
+        setVelX(0.0);
+        setVelY(0.0);
+        setMoveAngle(0.0);
+        setFaceAngle(0.0);
+        
+    }// end constructor
+    
     // variables
     private Shape shape;
     private boolean alive;
