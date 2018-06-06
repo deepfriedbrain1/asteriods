@@ -50,6 +50,60 @@ public class BaseVectorShape
     }
     
     // mutator and helper methods
+    public void setShape(Shape shape){
+        this.shape = shape;
+    }
     
+    public void setAlive(boolean alive){
+        this.alive = alive;
+    }
+    
+    public void setX(double x){
+        this.x = x;
+    }
+    
+    public void setY(double y){
+        this.y = y;
+    }
+    
+    public void incX(double amount){
+        this.x += amount;
+    }
+    
+    public void incY(double amount){
+        this.y += amount;
+    }
+    
+    public void setVelX(double velocity){
+       this.velocity_x = velocity;
+    }
+    
+    public void setVelY(double velocity){
+        this.velocity_y = velocity;
+    }
+    
+    public void incVelX(double velocity){
+        this.velocity_x += velocity;
+    }
+    
+    public void incVelY(double velocity){
+        this.velocity_y += velocity;
+    }
+    
+    public void setFaceAngle(double angle){
+        this.faceAngle = angle;
+    }
+    
+    public void setMoveAngle(double angle){
+        this.moveAngle = angle;
+    }
+    
+    public void incFaceAngle(double amount){
+        this.faceAngle += amount;
+    }
+    
+    public void incMoveAngle(double amount){
+        this.moveAngle += amount;
+    }
     
 }// end BaseVectorShape
