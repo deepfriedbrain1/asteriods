@@ -145,6 +145,43 @@ public class Asteriods extends Applet implements Runnable, KeyListener
         checkCollisions();
     }
 
+    public void updateShip(){
+        ship.incX(ship.getVelX());
+        
+        if(ship.getX() < -10)
+            ship.setX(getSize().width+10);
+        else if (ship.getX() > getSize().width+10)
+            ship.setX(-10);
+        
+        ship.incY(ship.getVelY());
+        
+        if(ship.getY() < -10)
+            ship.setY(getSize().height+10);
+        else if(ship.getY() > getSize().height+10)
+           ship.setY(-10);
+    }
+    
+    public void updateBullets(){
+        for(int i = 0; i < BULLETS; i++){
+            if(bullet[i].isAlive()){
+                bullet[i].incX(bullet[i].getVelX());
+                
+                if(bullet[i].getX() < 0 ||
+                   bullet[i].getX() > getSize().width)
+                {
+                    bullet[i].setAlive(false);
+                }
+                
+                bullet[i].incY(bullet[i].getVelY());
+                
+                if(bullet[i].getY() < 0 || bullet[i].getY() > getSize().height)
+                {
+                    bullet[i].setAlive(false);
+                }
+            }
+        }
+    }//end updateBullets
+    
     @Override
     public void keyTyped(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet.");
