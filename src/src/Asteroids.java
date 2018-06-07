@@ -15,7 +15,7 @@ import javax.swing.JFrame;
  * Primary class for the game
  * @author Alberto Fernandez Saucedo
  */
-public class Asteriods extends Applet implements Runnable, KeyListener 
+public class Asteroids extends Applet implements Runnable, KeyListener 
 {
     
     Thread thread; // the main thead that becomes the game loop
@@ -236,12 +236,9 @@ public class Asteriods extends Applet implements Runnable, KeyListener
                 }
             }
         }
-    }
+    }//end checkCollisions
     
-    @Override
-    public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -250,7 +247,11 @@ public class Asteriods extends Applet implements Runnable, KeyListener
 
     @Override
     public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // Empty
     }
     
-}
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // Empty
+    }
+}//end Asteroids
