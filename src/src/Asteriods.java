@@ -182,6 +182,33 @@ public class Asteriods extends Applet implements Runnable, KeyListener
         }
     }//end updateBullets
     
+    public void updateAsteroids(){
+        for(int i = 0; i < ASTEROIDS; i++){
+            if(ast[i].isAlive()){
+                ast[i].incX(ast[i].getVelX());
+                
+                if(ast[i].getX() < -20)
+                    ast[i].setX(getSize().width+20);
+                else if(ast[i].getX() > getSize().width+20)
+                    ast[i].setX(-20);
+                
+                ast[i].incY(ast[i].getVelY());
+                
+                if(ast[i].getY() < -20)
+                    ast[i].setY(getSize().height+20);
+                else if(ast[i].getY() > getSize().height+20)
+                    ast[i].setY(-20);
+                
+                ast[i].incMoveAngle(ast[i].getRotationVelocity());
+                
+                if(ast[i].getMoveAngle() < 0)
+                    ast[i].setMoveAngle(360 - ast[i].getRotationVelocity());
+                else if(ast[i].getMoveAngle() > 360)
+                    ast[i].setMoveAngle(ast[i].getRotationVelocity());
+            }
+        }
+    }
+    
     @Override
     public void keyTyped(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet.");
