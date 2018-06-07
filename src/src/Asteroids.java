@@ -96,6 +96,17 @@ public class Asteroids extends Applet implements Runnable, KeyListener
         g2d.fill(ship.getShape());
     }
     
+    public void drawBullets(){
+        for(int i = 0; i < BULLETS; i++){
+            if(bullet[i].isAlive()){
+                g2d.setTransform(identity);
+                g2d.translate(bullet[i].getX(), bullet[i].getY());
+                g2d.setColor(Color.MAGENTA);
+                g2d.draw(bullet[i].getShape());
+            }
+        }
+    }
+    
     public void drawAsteroids(){
         for(int i = 0; i < ASTEROIDS; i++){
             if(ast[i].isAlive()){
@@ -238,13 +249,52 @@ public class Asteroids extends Applet implements Runnable, KeyListener
         }
     }//end checkCollisions
     
-
+    public double calcAngleMoveX(double angle){
+        return (double)(Math.cos(angle * Math.PI / 180));
+    }
+    
+    public double calcAngleMoveY(double angle){
+        return (double)(Math.sin(angle * Math.PI / 180));
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
+        int keyCode = e.getKeyCode();
+        
+        switch(keyCode){
+            case KeyEvent.VK_LEFT: ship.incFaceAngle(-5);
+                                   if(ship.getFaceAngle() < 0)
+                                       ship.setFaceAngle(360-5);
+                                   break;
+            case KeyEvent.VK_RIGHT: ship.incFaceAngle(5);
+                                    if(ship.getFaceAngle() > 360)
+                                        ship.setFaceAngle(5);
+                                    break;
+            case KeyEvent.VK_UP: ship.setMoveAngle(ship.getFaceAngle()-90);
+                                 ship.incVelX(calcAngleMoveX(ship.getMoveAngle())*0.1);
+                                 ship.incVelY(calcAngleMoveX(ship.getMoveAngle())*0.1);
+                                 break;
+            case KeyEvent.VK_CONTROL:
+            case KeyEvent.VK_ENTER:
+            case KeyEvent.VK_SPACE: 
+                                    currentBullet++;
+                                    if(currentBullet > BULLETS-1)
+                                        currentBullet = 0;
+                                    bullet[currentBullet].setAlive(true);
+                                    
+                                    bullet[currentBullet].setX(ship.getX());
+                                    bullet[currentBullet].setY(ship.getY());
+                                    bullet[currentBullet].setMoveAngle(ship.getFaceAngle()-90);
+                                    
+                                    double angle = bullet[currentBullet].getMoveAngle();
+                                    double svx = ship.getVelX();
+                                    double svy = ship.getVelY();
+                                    bullet[currentBullet].setVelX(svx+calcAngleMoveX(angle)*2);
+                                    bullet[currentBullet].setVelY(svy+calcAngleMoveY(angle)*2);
+                                    break;
+        }
+    }// end keyPressed
+    
     @Override
     public void keyReleased(KeyEvent e) {
         // Empty
