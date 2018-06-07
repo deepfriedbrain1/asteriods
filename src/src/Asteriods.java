@@ -207,6 +207,35 @@ public class Asteriods extends Applet implements Runnable, KeyListener
                     ast[i].setMoveAngle(ast[i].getRotationVelocity());
             }
         }
+    }//end updateAsteroids
+    
+    public void checkCollisions(){
+        for(int i = 0; i < ASTEROIDS; i++){
+            if(ast[i].isAlive()){
+                
+                for(int n = 0; n < BULLETS; n++){
+                    if(bullet[n].isAlive()){
+                        
+                        if(ast[i].getBounds().contains(
+                            bullet[n].getX(), bullet[n].getY())){
+                            bullet[n].setAlive(false);
+                            ast[i].setAlive(false);
+                            continue;
+                        }
+                    }
+                }
+                
+                if(ast[i].getBounds().intersects(ship.getBounds())){
+                    ast[i].setAlive(false);
+                    ship.setX(320);
+                    ship.setY(240);
+                    ship.setFaceAngle(0);
+                    ship.setVelX(0);
+                    ship.setVelY(0);
+                    continue;
+                }
+            }
+        }
     }
     
     @Override
